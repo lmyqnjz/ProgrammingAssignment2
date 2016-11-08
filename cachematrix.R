@@ -1,15 +1,17 @@
-## Put comments here that give an overall description of what your
-## functions do
-
-## Write a short comment describing this function
-
-makeCacheMatrix <- function(x = matrix()) {
-
+makeCacheMatrix = function(mat) {
+  inverse.mat = solve(mat)
+  x = list(matrix = mat,
+           matrix.inverse = inverse.mat)
+  class(x) = "cache.inverse.matrix"
+  x
 }
 
 
-## Write a short comment describing this function
-
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+cacheSolve = function(obj){
+  if(class(obj) == "cache.inverse.matrix")
+    return(obj$matrix.inverse)
+  else {
+    x = makeCacheMatrix(obj)
+    return(x$matrix.inverse)
+  }
 }
